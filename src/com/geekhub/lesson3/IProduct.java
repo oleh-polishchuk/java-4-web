@@ -2,5 +2,11 @@ package com.geekhub.lesson3;
 
 public interface IProduct {
 
-    void setPrice(Integer price);
+    String getName();
+
+    Integer getPrice();
+
+    String getCategory();
+
+    Integer getTotal();
 }

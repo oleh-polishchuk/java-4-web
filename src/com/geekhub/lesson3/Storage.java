@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Storage {
 
-    Map<String, Object> storageProductMap = new HashMap<>();
+    Map<String, IProduct> storageProductMap = new HashMap<>();
     Map<String, Integer> storageCounterMap = new HashMap<>();
 
     StorageScanner storageScanner;
@@ -65,12 +65,26 @@ public class Storage {
     }
 
     public void printInfo() {
-        for (Map.Entry<String, Object> entry : storageProductMap.entrySet()) {
-            System.out.printf(entry.getValue().toString() + "$\n");
+        for (Map.Entry<String, IProduct> entry : storageProductMap.entrySet()) {
+            IProduct product = entry.getValue();
+            System.out.printf("Name: %s. Price: %d$ \n", product.getName(), product.getPrice());
         }
-        for (Map.Entry<String, Integer> entry : storageCounterMap.entrySet()) {
-            System.out.printf("Total in category %s: %d \n", entry.getKey().substring(entry.getKey().lastIndexOf(".") + 1), entry.getValue());
+
+        Map<String, IProduct> uniqueProduct = getUnique(storageProductMap);
+        for (Map.Entry<String, IProduct> entry : uniqueProduct.entrySet()) {
+            IProduct product = entry.getValue();
+            System.out.printf("Total in category %s: %d \n", product.getCategory(), product.getTotal());
         }
-        System.out.println();
+    }
+
+    private static Map getUnique(Map<String, IProduct> records) {
+        Map<String, IProduct> unique = new HashMap<>();
+        for (Map.Entry<String, IProduct> entry : records.entrySet()) {
+            IProduct product = entry.getValue();
+            if (!unique.containsKey(product.getCategory())) {
+                unique.put(product.getCategory(), entry.getValue());
+            }
+        }
+        return unique;
     }
 }
