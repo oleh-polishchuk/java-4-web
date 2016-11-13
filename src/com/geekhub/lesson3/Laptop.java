@@ -35,6 +35,11 @@ public class Laptop implements IProduct {
     }
 
     @Override
+    public void decreaseTotal() {
+        total--;
+    }
+
+    @Override
     public String toString() {
         return description;
     }

@@ -9,4 +9,6 @@ public interface IProduct {
     String getCategory();
 
     Integer getTotal();
+
+    void decreaseTotal();
 }

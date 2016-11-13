@@ -17,7 +17,6 @@ public class StorageScanner {
             System.out.println(message);
             scanner.next();
         }
-
         return scanner.nextInt();
     }
 

@@ -5,7 +5,6 @@ import java.util.*;
 public class Storage {
 
     Map<String, IProduct> storageProductMap = new HashMap<>();
-    Map<String, Integer> storageCounterMap = new HashMap<>();
 
     StorageScanner storageScanner;
 
@@ -19,31 +18,19 @@ public class Storage {
                 "2. Tablet\n" +
                 "3. Laptop\n";
         Integer item = storageScanner.getIntForMessage(message);
+        String name = storageScanner.getStringForMessage("Enter product name:");
+        Integer price = storageScanner.getIntForMessage("Enter product price, ($):");
+
         switch (item) {
             case 1: {
-                String name = storageScanner.getStringForMessage("Enter product name:");
-                Integer price = storageScanner.getIntForMessage("Enter product price, ($):");
-                if (!storageProductMap.containsKey(name)) {
-                    storageCounterMap.put(Mobile.class.getName(), storageCounterMap.getOrDefault(Mobile.class.getName(), 0) + 1);
-                }
                 storageProductMap.put(name, new Mobile(name, price));
                 break;
             }
             case 2: {
-                String name = storageScanner.getStringForMessage("Enter product name:");
-                Integer price = storageScanner.getIntForMessage("Enter product price, ($):");
-                if (!storageProductMap.containsKey(name)) {
-                    storageCounterMap.put(Tablet.class.getName(), storageCounterMap.getOrDefault(Tablet.class.getName(), 0) + 1);
-                }
                 storageProductMap.put(name, new Tablet(name, price));
                 break;
             }
             case 3: {
-                String name = storageScanner.getStringForMessage("Enter product name:");
-                Integer price = storageScanner.getIntForMessage("Enter product price, ($):");
-                if (!storageProductMap.containsKey(name)) {
-                    storageCounterMap.put(Laptop.class.getName(), storageCounterMap.getOrDefault(Laptop.class.getName(), 0) + 1);
-                }
                 storageProductMap.put(name, new Laptop(name, price));
                 break;
             }
@@ -55,12 +42,14 @@ public class Storage {
 
     public void remove() {
         String name = storageScanner.getStringForMessage("Enter product name:");
+
         if (!storageProductMap.containsKey(name)) {
             System.out.printf("Item %s does not exist \n", name);
             return;
         }
-        String itemClassName = storageProductMap.get(name).getClass().getName();
-        storageCounterMap.put(itemClassName, storageCounterMap.get(itemClassName) - 1);
+
+        IProduct product = storageProductMap.get(name);
+        product.decreaseTotal();
         storageProductMap.remove(name);
     }
 
@@ -77,14 +66,16 @@ public class Storage {
         }
     }
 
-    private static Map getUnique(Map<String, IProduct> records) {
+    private static Map<String, IProduct> getUnique(Map<String, IProduct> records) {
         Map<String, IProduct> unique = new HashMap<>();
+
         for (Map.Entry<String, IProduct> entry : records.entrySet()) {
             IProduct product = entry.getValue();
             if (!unique.containsKey(product.getCategory())) {
                 unique.put(product.getCategory(), entry.getValue());
             }
         }
+
         return unique;
     }
 }
