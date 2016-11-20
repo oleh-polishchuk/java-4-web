@@ -16,7 +16,7 @@ public class ZipScanner {
         String dirPath = scanner.next();
 
         while (!isValidPath(dirPath)) {
-            System.out.println("Wrong path: " + dirPath);
+            System.out.println("The directory name you entered is not valid.");
             System.out.println(message);
             dirPath = scanner.next();
         }

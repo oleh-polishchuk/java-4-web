@@ -8,8 +8,6 @@ public class ZipReader {
     private ArrayList<String> files = new ArrayList<>();
 
     public ArrayList<String> readDir(String dirPath) {
-        System.out.println("Reading...");
-
         File root = new File(dirPath);
         File[] list = root.listFiles();
 
