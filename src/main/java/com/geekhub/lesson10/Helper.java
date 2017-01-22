@@ -18,7 +18,7 @@ public class Helper {
     }
 
     public ArrayList<String> getLinks() throws IOException {
-        FileReader fileReader = new FileReader(config.getProperty("links.path"));
+        FileReader fileReader = new FileReader("C:/workspace/java-4-web/src/main/resources/links.txt");
         BufferedReader reader = new BufferedReader(fileReader);
         ArrayList<String> links = new ArrayList<>();
 

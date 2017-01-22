@@ -9,7 +9,7 @@ public class Config extends Properties {
     private static volatile Config instance = null;
 
     public static Properties getInstance() throws IOException {
-        String filePath = "./src/com/geekhub/lesson10/resources/config.properties";
+        String filePath = "C:/workspace/java-4-web/src/main/resources/config.properties";
 
         if (instance == null) {
             synchronized (Config.class) {

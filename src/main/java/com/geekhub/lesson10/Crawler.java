@@ -8,6 +8,10 @@ import java.net.URL;
 public class Crawler {
 
     public String getContentByLink(String link) throws IOException {
+        if (link.length() == 0) {
+            return null;
+        }
+
         StringBuilder content = new StringBuilder();
 
         URL url = new URL(link);
