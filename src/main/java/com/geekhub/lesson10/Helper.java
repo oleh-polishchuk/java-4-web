@@ -18,7 +18,20 @@ public class Helper {
     }
 
     public ArrayList<String> getLinks() throws IOException {
-        FileReader fileReader = new FileReader("C:/workspace/java-4-web/src/main/resources/links.txt");
+        FileReader fileReader = new FileReader(config.getProperty("links.path"));
+        BufferedReader reader = new BufferedReader(fileReader);
+        ArrayList<String> links = new ArrayList<>();
+
+        String line;
+        while ((line = reader.readLine()) != null) {
+            links.add(line);
+        }
+
+        return links;
+    }
+
+    public ArrayList<String> getLinks(Properties config) throws IOException {
+        FileReader fileReader = new FileReader(config.getProperty("links.path"));
         BufferedReader reader = new BufferedReader(fileReader);
         ArrayList<String> links = new ArrayList<>();
 
